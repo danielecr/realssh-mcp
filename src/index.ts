@@ -10,7 +10,7 @@ import { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 const SSHExecuteSchema = z.object({
   host: z.string().describe("SSH server hostname or IP address (e.g., 'dev234' or '192.168.1.100')"),
   port: z.number().default(22).describe("SSH server port (default: 22)"),
-  username: z.string().describe("SSH username (e.g., 'username')"),
+  username: z.string().optional().describe("SSH username (e.g., 'username'). Defaults to the current OS user."),
   command: z.string().describe("Command to execute on the remote server"),
   timeout: z.number().default(30000).describe("Command timeout in milliseconds (default: 30000)"),
   agentForward: z.boolean().default(false).describe("Enable SSH agent forwarding (default: false)"),
@@ -40,7 +40,7 @@ function validateSSHParams(params: SSHExecuteParams): void {
     throw new Error(`Invalid host: "${params.host}"`);
   }
   // Prevent username from being interpreted as an SSH flag
-  if (params.username.startsWith('-')) {
+  if (params.username !== undefined && params.username.startsWith('-')) {
     throw new Error(`Invalid username: "${params.username}"`);
   }
 }
@@ -71,7 +71,8 @@ function executeSSHCommand(params: SSHExecuteParams): Promise<{ stdout: string; 
     }
 
     // Use -- to ensure the destination is not parsed as an option
-    args.push('--', `${params.username}@${params.host}`, params.command);
+    const destination = params.username ? `${params.username}@${params.host}` : params.host;
+    args.push('--', destination, params.command);
 
     const child = spawn('ssh', args, {
       // Pass through the full environment so SSH_AUTH_SOCK, SSH_AGENT_PID,
@@ -116,7 +117,7 @@ server.registerTool(
       
       const response = {
         command: params.command,
-        host: `${params.username}@${params.host}:${params.port}`,
+        host: params.username ? `${params.username}@${params.host}:${params.port}` : `${params.host}:${params.port}`,
         exitCode: result.exitCode,
         stdout: result.stdout,
         stderr: result.stderr,
@@ -169,11 +170,11 @@ server.registerTool(
     inputSchema: {
       host: z.string().describe("SSH server hostname or IP address"),
       port: z.number().default(22).describe("SSH server port (default: 22)"),
-      username: z.string().describe("SSH username"),
+      username: z.string().optional().describe("SSH username. Defaults to the current OS user."),
       extraArgs: z.array(z.string()).optional().describe("Extra SSH arguments")
     }
   },
-  async (params: { host: string; port: number; username: string; extraArgs?: string[] }): Promise<CallToolResult> => {
+  async (params: { host: string; port: number; username?: string; extraArgs?: string[] }): Promise<CallToolResult> => {
     try {
       const result = await executeSSHCommand({
         ...params,
@@ -188,8 +189,8 @@ server.registerTool(
           {
             type: "text",
             text: reachable
-              ? `SSH connectivity OK: ${params.username}@${params.host}:${params.port}`
-              : `SSH connectivity FAILED: ${params.username}@${params.host}:${params.port}\n${result.stderr || result.stdout}`
+              ? `SSH connectivity OK: ${params.username ? params.username + '@' : ''}${params.host}:${params.port}`
+              : `SSH connectivity FAILED: ${params.username ? params.username + '@' : ''}${params.host}:${params.port}\n${result.stderr || result.stdout}`
           }
         ],
         isError: !reachable

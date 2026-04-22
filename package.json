@@ -1,11 +1,11 @@
 {
-  "name": "@alolite/ssh-mcp",
+  "name": "@danielecr/realssh-mcp",
   "version": "1.0.4",
   "description": "MCP server for SSH remote command execution",
   "type": "module",
   "main": "build/index.js",
   "bin": {
-    "alolite-ssh-mcp": "./build/index.js"
+    "realssh-mcp": "./build/index.js"
   },
   "scripts": {
     "build": "tsc && chmod +x build/index.js",
@@ -35,10 +35,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jppradhan/ssh-mcp.git"
+    "url": "git+https://github.com/danielecr/realssh-mcp.git"
   },
-  "homepage": "https://github.com/jppradhan/ssh-mcp#readme",
+  "homepage": "https://github.com/danielecr/realssh-mcp#readme",
   "bugs": {
-    "url": "https://github.com/jppradhan/ssh-mcp/issues"
+    "url": "https://github.com/danielecr/realssh-mcp/issues"
   }
 }
