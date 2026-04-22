@@ -1,11 +1,11 @@
 {
-  "name": "@alolite/ssh-mcp",
+  "name": "@danielecr/realssh-mcp",
   "version": "1.0.4",
   "description": "MCP server for SSH remote command execution",
   "type": "module",
   "main": "build/index.js",
   "bin": {
-    "alolite-ssh-mcp": "./build/index.js"
+    "realssh-mcp": "./build/index.js"
   },
   "scripts": {
     "build": "tsc && chmod +x build/index.js",
@@ -16,15 +16,13 @@
     "build"
   ],
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.0.2",
-    "ssh2": "^1.15.0",
-    "zod": "^3.22.4"
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
-    "@types/node": "^20.0.0",
-    "@types/ssh2": "^1.15.0",
-    "tsx": "^4.6.0",
-    "typescript": "^5.3.0"
+    "@types/node": "^25.0.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
   },
   "keywords": [
     "mcp",
@@ -37,10 +35,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jppradhan/ssh-mcp.git"
+    "url": "git+https://github.com/danielecr/realssh-mcp.git"
   },
-  "homepage": "https://github.com/jppradhan/ssh-mcp#readme",
+  "homepage": "https://github.com/danielecr/realssh-mcp#readme",
   "bugs": {
-    "url": "https://github.com/jppradhan/ssh-mcp/issues"
+    "url": "https://github.com/danielecr/realssh-mcp/issues"
   }
 }
