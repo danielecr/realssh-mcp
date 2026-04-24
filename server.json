@@ -1,0 +1,20 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.danielecr/realssh-mcp",
+  "description": "MCP server for SSH remote command execution",
+  "repository": {
+    "url": "https://github.com/danielecr/realssh-mcp",
+    "source": "github"
+  },
+  "version": "1.0.4",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@danielecr/realssh-mcp",
+      "version": "1.0.4",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}
