@@ -1,0 +1,6 @@
+version: "1"
+start:
+  command: npx
+  args:
+    - "-y"
+    - "@danielecr/realssh-mcp"
