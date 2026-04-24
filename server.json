@@ -15,15 +15,16 @@
       "transport": {
         "type": "stdio"
       },
+      "installs": {
+        "npm": {
+          "command": "npx",
+          "args": ["-y", "@danielecr/realssh-mcp"]
+        }
+      },
       "configSchema": {
         "type": "object",
-        "properties": {
-          "SSH_HOST": {
-            "type": "string",
-            "description": "The remote SSH host address"
-          }
-        },
-        "required": []
+        "properties": {},
+        "description": "This server uses dynamic tool arguments for SSH connections and does not require persistent environment configuration."
       }
     }
   ]
