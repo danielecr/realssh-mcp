@@ -1,7 +1,7 @@
 {
   "name": "@danielecr/realssh-mcp",
   "mcpName": "io.github.danielecr/realssh-mcp",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "MCP server for SSH remote command execution",
   "type": "module",
   "main": "build/index.js",
