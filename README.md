@@ -36,21 +36,7 @@ npm run build
 
 ## VS Code / Copilot configuration
 
-Add to `~/Library/Application Support/Code/User/mcp.json` (macOS) or the equivalent on your OS:
-
-```json
-{
-  "servers": {
-    "realssh": {
-      "type": "stdio",
-      "command": "node",
-      "args": ["/path/to/realssh-mcp/build/index.js"]
-    }
-  }
-}
-```
-
-Or using the global npm install:
+After installing the package globally, add the server to your MCP configuration. In VS Code, open the MCP config file via **Command Palette → MCP: Open User Configuration** and add:
 
 ```json
 {
@@ -62,6 +48,8 @@ Or using the global npm install:
   }
 }
 ```
+
+Then run **MCP: List Servers** to verify the server is active.
 
 ## Tools
 
